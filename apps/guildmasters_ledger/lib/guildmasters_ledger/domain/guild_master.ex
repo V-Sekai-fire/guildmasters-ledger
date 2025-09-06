@@ -11,6 +11,8 @@ defmodule GuildmastersLedger.Domain.GuildMaster do
 
   use AriaHybridPlanner.Domain
 
+  alias GuildmastersLedger.Persistence
+
   @type hero_id :: String.t()
   @type quest_id :: String.t()
   @type location_id :: String.t()
@@ -34,9 +36,11 @@ defmodule GuildmastersLedger.Domain.GuildMaster do
           ]
   @spec move_to_location(AriaState.t(), [hero_id(), location_id()]) :: {:ok, AriaState.t()} | {:error, atom()}
   def move_to_location(state, [hero_id, location_id]) do
-    state
-    |> AriaState.RelationalState.set_fact("location", hero_id, location_id)
-    |> AriaState.RelationalState.set_fact("hero_status", hero_id, "traveling")
+    # Update persistence layer
+    :ok = Persistence.set_fact("location", hero_id, location_id)
+    :ok = Persistence.set_fact("hero_status", hero_id, "traveling")
+
+    # Return updated state for planner compatibility
     {:ok, state}
   end
 
@@ -50,14 +54,14 @@ defmodule GuildmastersLedger.Domain.GuildMaster do
   def execute_quest(state, [quest_id, hero_id]) do
     # Simulate quest completion with random success
     if :rand.uniform() > 0.2 do  # 80% success rate
-      state
-      |> AriaState.RelationalState.set_fact("quest_status", quest_id, "completed")
-      |> AriaState.RelationalState.set_fact("hero_status", hero_id, "available")
-      |> AriaState.RelationalState.set_fact("guild_gold", "guild", get_gold(state) + 100)
+      # Update persistence layer
+      :ok = Persistence.set_fact("quest_status", quest_id, "completed")
+      :ok = Persistence.set_fact("hero_status", hero_id, "available")
+      current_gold = Persistence.get_fact("guild_gold", "guild") || 0
+      :ok = Persistence.set_fact("guild_gold", "guild", current_gold + 100)
     else
-      state
-      |> AriaState.RelationalState.set_fact("quest_status", quest_id, "failed")
-      |> AriaState.RelationalState.set_fact("hero_status", hero_id, "injured")
+      :ok = Persistence.set_fact("quest_status", quest_id, "failed")
+      :ok = Persistence.set_fact("hero_status", hero_id, "injured")
     end
     {:ok, state}
   end
@@ -66,9 +70,10 @@ defmodule GuildmastersLedger.Domain.GuildMaster do
   @action true
   @spec accept_quest(AriaState.t(), [quest_id()]) :: {:ok, AriaState.t()} | {:error, atom()}
   def accept_quest(state, [quest_id]) do
-    state
-    |> AriaState.RelationalState.set_fact("quest_status", quest_id, "accepted")
-    |> AriaState.RelationalState.set_fact("quest_accepted_at", quest_id, DateTime.utc_now())
+    # Update persistence layer
+    :ok = Persistence.set_fact("quest_status", quest_id, "accepted")
+    :ok = Persistence.set_fact("quest_accepted_at", quest_id, DateTime.utc_now())
+
     {:ok, state}
   end
 
@@ -98,7 +103,7 @@ defmodule GuildmastersLedger.Domain.GuildMaster do
   @unigoal_method predicate: "hero_status"
   @spec make_hero_available(AriaState.t(), {hero_id(), String.t()}) :: {:ok, [AriaEngine.todo_item()]} | {:error, atom()}
   def make_hero_available(state, {hero_id, "available"}) do
-    current_status = AriaState.RelationalState.get_fact(state, "hero_status", hero_id)
+    current_status = Persistence.get_fact("hero_status", hero_id)
 
     case current_status do
       "available" -> {:ok, []}  # Already available
@@ -119,14 +124,17 @@ defmodule GuildmastersLedger.Domain.GuildMaster do
 
   # Helper functions
   defp register_entity(state, [entity_id, type, capabilities]) do
+    # Update persistence layer
+    :ok = Persistence.set_fact("type", entity_id, type)
+    :ok = Persistence.set_fact("capabilities", entity_id, capabilities)
+    :ok = Persistence.set_fact("status", entity_id, "available")
+
+    # Return state unchanged for compatibility
     state
-    |> AriaState.RelationalState.set_fact("type", entity_id, type)
-    |> AriaState.RelationalState.set_fact("capabilities", entity_id, capabilities)
-    |> AriaState.RelationalState.set_fact("status", entity_id, "available")
   end
 
-  defp get_gold(state) do
-    AriaState.RelationalState.get_fact(state, "guild_gold", "guild") || 0
+  defp get_gold(_state) do
+    Persistence.get_fact("guild_gold", "guild") || 0
   end
 
   defp get_quest_location(_quest_id) do

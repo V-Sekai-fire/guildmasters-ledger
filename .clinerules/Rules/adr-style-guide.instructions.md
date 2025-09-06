@@ -1,6 +1,6 @@
-# ADR Style Guide: Concise Format (< 30 Lines)
+# ADR Style Guide: Concise Format (< 50 Lines)
 
-## Rule: Keep ADRs Under 30 Lines
+## Rule: Keep ADRs Under 50 Lines
 
 ### Purpose
 
@@ -8,7 +8,7 @@ ADRs should be concise and actionable. Long documents reduce readability and dec
 
 ### Format Requirements
 
-- **Maximum Length:** 30 lines total
+- **Maximum Length:** 50 lines total
 - **Structure:** Standard ADR sections (Context, Decision, etc.) but condensed
 - **Density:** Use paragraphs to combine related information
 - **Clarity:** Maintain readability while maximizing information density
@@ -62,6 +62,6 @@ ADRs should be concise and actionable. Long documents reduce readability and dec
 
 ### Enforcement
 
-- **Line Count Check:** All new ADRs must be < 30 lines
+- **Line Count Check:** All new ADRs must be < 50 lines
 - **Review Process:** ADR reviews should flag documents exceeding limit
-- **Exceptions:** Require explicit approval for > 30 line ADRs
+- **Exceptions:** Require explicit approval for > 50 line ADRs

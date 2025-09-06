@@ -1,6 +1,6 @@
 # **R25W1900005 - FoundationDB Performance Benchmarking**
 
-**Status:** Proposed | **Date:** September 6, 2025
+**Status:** Superceded | **Date:** September 6, 2025 | **Superceded:** September 6, 2025
 
 ## **Context**
 

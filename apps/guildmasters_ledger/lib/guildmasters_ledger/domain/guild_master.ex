@@ -1,4 +1,5 @@
-defmodule GuildmastersLedger.Domain.GuildMaster do
+# Temporarily disabled for benchmarking
+# defmodule GuildmastersLedger.Domain.GuildMaster do
   @moduledoc """
   Guild Master Domain for HTN Planning
 

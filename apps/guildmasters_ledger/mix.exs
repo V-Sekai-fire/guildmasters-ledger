@@ -30,12 +30,18 @@ defmodule GuildmastersLedger.MixProject do
 
   defp deps do
     [
-      # Local subrepo dependency
-      {:aria_hybrid_planner, in_umbrella: true},
+      # Local subrepo dependency (temporarily disabled for benchmarking)
+      # {:aria_hybrid_planner, in_umbrella: true},
 
       # Database dependencies for bitemporal 6NF support
       {:ecto_sql, "~> 3.10"},
       {:postgrex, ">= 0.0.0"},
+
+      # FoundationDB for high-concurrency benchmarking
+      {:ecto_foundationdb, "~> 0.5.0"},
+
+      # Benchmarking tool
+      {:benchee, "~> 1.0", only: :dev},
 
       # Godot integration (when available)
       # {:membrane_unifex, "~> 0.1"},

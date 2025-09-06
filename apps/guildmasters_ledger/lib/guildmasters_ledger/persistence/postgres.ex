@@ -98,22 +98,22 @@ defmodule GuildmastersLedger.Persistence.Postgres do
   # Helper functions for creating changesets
 
   defp create_changeset(Hero, :hero_id, subject, field, value) do
-    attrs = %{hero_id: subject, field => value}
+    attrs = Map.put(%{hero_id: subject}, field, value)
     Hero.changeset(%Hero{}, attrs)
   end
 
   defp create_changeset(Quest, :quest_id, subject, field, value) do
-    attrs = %{quest_id: subject, field => value}
+    attrs = Map.put(%{quest_id: subject}, field, value)
     Quest.changeset(%Quest{}, attrs)
   end
 
   defp create_changeset(Guild, :guild_id, subject, field, value) do
-    attrs = %{guild_id: subject, field => value}
+    attrs = Map.put(%{guild_id: subject}, field, value)
     Guild.changeset(%Guild{}, attrs)
   end
 
   defp create_changeset(Entity, :entity_id, subject, field, value) do
-    attrs = %{entity_id: subject, field => value}
+    attrs = Map.put(%{entity_id: subject}, field, value)
     Entity.changeset(%Entity{}, attrs)
   end
 

@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/V-Sekai-fire/aria-hybrid-planner
+	branch = main
+	commit = 0f621e320ee1dddbe36c80ac758b5a7a71a3cf23
+	parent = daab423547125ff4d58bf9b5bf44210271f16dfe
+	method = merge
+	cmdver = 0.4.9

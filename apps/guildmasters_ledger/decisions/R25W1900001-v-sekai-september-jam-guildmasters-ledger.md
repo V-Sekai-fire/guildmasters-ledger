@@ -162,7 +162,7 @@ We will implement this as a LitRPG Guild Master game that showcases autonomous A
 ## **Related ADRs**
 
 - **R25W1398085:** Unified Durative Action Specification and Planner Standardization (for HTN integration)
-- **bitemporal_6nf_postgres.sql:** Bitemporal 6NF PostgreSQL Schema (for world state persistence)
+- **R25W1900003:** Switch from Bitemporal 6NF to Ordinary PostgreSQL Schema (for world state persistence)
 - **R25W118994A:** Godot LibGodot Integration via Membrane Unifex (for client visualization)
 
 ## **Notes**

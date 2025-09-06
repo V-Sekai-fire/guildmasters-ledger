@@ -14,7 +14,7 @@ mix run --no-halt
 ## Architecture
 
 - **Backend**: Elixir with HTN planning
-- **Persistence**: PostgreSQL with bitemporal 6NF
+- **Persistence**: PostgreSQL with ordinary relational schema
 - **Client**: Godot 3D with Membrane Unifex
 - **Planning**: Aria Hybrid Planner
 

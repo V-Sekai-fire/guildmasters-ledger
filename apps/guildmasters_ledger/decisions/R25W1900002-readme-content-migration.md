@@ -19,7 +19,7 @@ This project implements a LitRPG Guild Master game where players make strategic 
 ### Architecture
 
 - **Backend**: Elixir with HTN (Hierarchical Task Network) planning
-- **Persistence**: PostgreSQL with bitemporal 6NF schema
+- **Persistence**: PostgreSQL with ordinary relational schema
 - **Client**: Godot 3D engine with Membrane Unifex integration
 - **Planning**: Aria Hybrid Planner for autonomous hero execution
 
@@ -29,7 +29,7 @@ This project implements a LitRPG Guild Master game where players make strategic 
 - Strategic quest acceptance and hero assignment
 - Persistent world state with complete history
 - Real-time 3D visualization in Godot
-- Bitemporal PostgreSQL persistence
+- Simple PostgreSQL persistence
 
 ### Quick Start
 
@@ -108,13 +108,13 @@ All game objects are entities with types and capabilities:
 %{type: "location", capabilities: [:dangerous, :resource_rich]}
 ```
 
-#### Bitemporal Persistence
+#### Simple Persistence
 
-World state is persisted using bitemporal 6NF:
+World state is persisted using a simple relational schema:
 
-- **Valid Time**: When facts are true in the game world
-- **Transaction Time**: When facts were recorded in the database
-- **Immutability**: Changes create new records, never modify existing ones
+- **Facts Table**: Stores game facts as (predicate, subject, value) triples
+- **Direct API Support**: Compatible with HTN planning `get_fact`/`set_fact` operations
+- **Performance**: Optimized for simple fact queries and updates
 
 ### Development
 
@@ -182,7 +182,7 @@ git subrepo push subrepos/aria-hybrid-planner
 - ⏳ Quest board UI
 
 #### Phase 4: Persistence & Networking
-- ⏳ Bitemporal world state persistence
+- ⏳ Simple world state persistence
 - ⏳ ENet real-time updates
 - ⏳ Guild progression tracking
 
@@ -205,4 +205,4 @@ git subrepo push subrepos/aria-hybrid-planner
 - [R25W1900001](apps/guildmasters_ledger/decisions/R25W1900001-v-sekai-september-jam-guildmasters-ledger.md) - Main game concept
 - [R25W1398085](apps/guildmasters_ledger/decisions/R25W1398085-unified-durative-action-specification-and-planner-standardization.md) - HTN specification
 - [R25W118994A](apps/guildmasters_ledger/decisions/R25W118994A-godot-libgodot-integration-via-membrane-unifex.md) - Godot integration
-- [bitemporal_6nf_postgres.sql](apps/guildmasters_ledger/decisions/bitemporal_6nf_postgres.sql) - Persistence schema
+- [R25W1900003](R25W1900003-switch-to-ordinary-postgresql-schema.md) - Switch to ordinary PostgreSQL schema

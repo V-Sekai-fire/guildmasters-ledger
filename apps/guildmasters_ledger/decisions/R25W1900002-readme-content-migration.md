@@ -54,11 +54,10 @@ This project implements a LitRPG Guild Master game where players make strategic 
 
 3. **Setup PostgreSQL database:**
    ```bash
-   # Create database
+   # FIXME: Create database
    createdb guildmasters_ledger_dev
 
-   # Run the bitemporal schema
-   psql -d guildmasters_ledger_dev -f decisions/bitemporal_6nf_postgres.sql
+   # FIXME: Run the elixir migrations
    ```
 
 4. **Start the application:**
@@ -85,30 +84,6 @@ domain = GuildmastersLedger.Domain.GuildMaster.create_domain()
 
 # Execute the plan
 {:ok, {final_state, _tree}} = AriaHybridPlanner.run_lazy_tree(domain, initial_state, solution_tree)
-```
-
-### Project Structure
-
-```
-guildmasters-ledger/
-├── decisions/                    # Architectural decision records
-│   ├── R25W1900001-v-sekai-september-jam-guildmasters-ledger.md
-│   ├── R25W1398085-unified-durative-action-specification-and-planner-standardization.md
-│   ├── R25W118994A-godot-libgodot-integration-via-membrane-unifex.md
-│   └── bitemporal_6nf_postgres.sql
-├── lib/
-│   └── guildmasters_ledger/
-│       ├── application.ex        # Application supervisor
-│       ├── domain/
-│       │   └── guild_master.ex   # HTN planning domain
-│       └── guildmasters_ledger.ex # Main module
-├── subrepos/
-│   └── aria-hybrid-planner/      # Git subrepo for planning engine
-├── config/                       # Configuration files
-├── test/                         # Test files
-├── priv/                         # Private assets
-├── mix.exs                       # Project configuration
-└── README.md
 ```
 
 ### Core Concepts
@@ -218,10 +193,6 @@ git subrepo push subrepos/aria-hybrid-planner
 3. Update documentation as needed
 4. Ensure dialyzer passes
 
-### License
-
-This project is part of the V-Sekai September Jam and follows the same licensing as the parent project.
-
 ## **Consequences**
 
 ### **Positive**
@@ -231,7 +202,7 @@ This project is part of the V-Sekai September Jam and follows the same licensing
 - Better separation of concerns between overview and implementation details
 
 ### **Related Decisions**
-- [R25W1900001](R25W1900001-v-sekai-september-jam-guildmasters-ledger.md) - Main game concept
-- [R25W1398085](R25W1398085-unified-durative-action-specification-and-planner-standardization.md) - HTN specification
-- [R25W118994A](R25W118994A-godot-libgodot-integration-via-membrane-unifex.md) - Godot integration
-- [bitemporal_6nf_postgres.sql](bitemporal_6nf_postgres.sql) - Persistence schema
+- [R25W1900001](apps/guildmasters_ledger/decisions/R25W1900001-v-sekai-september-jam-guildmasters-ledger.md) - Main game concept
+- [R25W1398085](apps/guildmasters_ledger/decisions/R25W1398085-unified-durative-action-specification-and-planner-standardization.md) - HTN specification
+- [R25W118994A](apps/guildmasters_ledger/decisions/R25W118994A-godot-libgodot-integration-via-membrane-unifex.md) - Godot integration
+- [bitemporal_6nf_postgres.sql](apps/guildmasters_ledger/decisions/bitemporal_6nf_postgres.sql) - Persistence schema

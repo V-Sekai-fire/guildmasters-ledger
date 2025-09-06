@@ -27,4 +27,4 @@ mix run --no-halt
 
 ## Documentation
 
-See [decisions/R25W1900002-readme-content-migration.md](decisions/R25W1900002-readme-content-migration.md) for detailed documentation, API reference, and development setup.
+See [apps/guildmasters_ledger/decisions/R25W1900002-readme-content-migration.md](apps/guildmasters_ledger/decisions/R25W1900002-readme-content-migration.md) for detailed documentation, API reference, and development setup.

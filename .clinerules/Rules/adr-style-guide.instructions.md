@@ -43,6 +43,7 @@ ADRs should be concise and actionable. Long documents reduce readability and dec
 3. **Eliminate Redundancy:** Remove duplicate explanations
 4. **Focus on Essentials:** Include only decision-critical information
 5. **Maintain Structure:** Keep standard ADR sections for consistency
+6. **Include Concrete Examples:** When ADR title contains "syntax" or "specification", include concrete code examples in Next Steps
 
 ### Example Length Targets
 

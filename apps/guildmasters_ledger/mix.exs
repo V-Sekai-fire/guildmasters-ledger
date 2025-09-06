@@ -1,9 +1,9 @@
-defmodule GuildmastersLedger.Umbrella.MixProject do
+defmodule GuildmastersLedger.MixProject do
   use Mix.Project
 
   def project do
     [
-      apps_path: "apps",
+      app: :guildmasters_ledger,
       version: "0.1.0",
       elixir: "~> 1.17",
       start_permanent: Mix.env() == :prod,
@@ -21,14 +21,27 @@ defmodule GuildmastersLedger.Umbrella.MixProject do
     ]
   end
 
-  # Dependencies listed here are available to all apps in the umbrella
+  def application do
+    [
+      extra_applications: [:logger],
+      mod: {GuildmastersLedger.Application, []}
+    ]
+  end
+
   defp deps do
     [
-      # Test dependencies
-      {:mox, "~> 1.0", only: :test},
-      {:excoveralls, "~> 0.18", only: :test},
-      {:ex_doc, "~> 0.31", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false}
+      # Local subrepo dependency
+      {:aria_hybrid_planner, in_umbrella: true},
+
+      # Database dependencies for bitemporal 6NF support
+      {:ecto_sql, "~> 3.10"},
+      {:postgrex, ">= 0.0.0"},
+
+      # Godot integration (when available)
+      # {:membrane_unifex, "~> 0.1"},
+
+      # Networking for real-time updates
+      {:plug_cowboy, "~> 2.6"}
     ]
   end
 

@@ -1,6 +1,6 @@
 # **R25W1900006 - Storage Technology Selection: PostgreSQL vs SQLite vs FoundationDB**
 
-**Status:** Proposed | **Date:** September 6, 2025
+**Status:** Completed | **Date:** September 6, 2025
 
 ## **Context**
 
@@ -20,8 +20,9 @@ Week 1: Benchmark each technology with game workloads. Week 2: Compare results a
 
 ## **Next Steps**
 
-1. Set up PostgreSQL, SQLite, and FoundationDB test environments
-2. Run standardized benchmarks (hero state updates, HTN queries, concurrent operations)
-3. Evaluate operational requirements (deployment, monitoring, scaling)
-4. Compare total cost of ownership and maintenance complexity
-5. Make final technology selection based on performance and operational fit
+1. Create R25W1900007: PostgreSQL technology analysis and evaluation
+2. Create R25W1900008: SQLite technology analysis and evaluation
+3. Create R25W1900009: FoundationDB technology analysis and evaluation
+4. Create R25W1900010: Implementation and migration strategy
+5. Create R25W1900011: Cost analysis and total cost of ownership
+6. Consolidate findings and make final technology selection
